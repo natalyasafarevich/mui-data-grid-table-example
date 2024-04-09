@@ -30,7 +30,7 @@ const Theme = ({themes}) => {
 
   return (
     <form className='flex'>
-      {lang === 'ru-RU' ? 'Тема' : 'Language'}
+      {lang === 'ru-RU' ? 'Тема' : 'Theme'}
       {themes.map((theme) => (
         <div key={theme.id}>
           <input

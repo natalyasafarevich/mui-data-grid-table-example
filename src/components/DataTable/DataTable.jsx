@@ -65,7 +65,6 @@ const DataTable = () => {
   useEffect(() => {
     if (films_lang) {
       dispatch(getAllFilms(films_lang));
-      setParams((prev) => ({...prev, filter: defaultFilter}));
     }
   }, [films_lang]);
 
