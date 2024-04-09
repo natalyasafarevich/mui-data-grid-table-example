@@ -7,7 +7,6 @@ export function getAllFilms(lang) {
     try {
       const response = await getFilms(lang);
       const result = response.data.results;
-      // const count = response.data.count;
       dispatch({type: FILMS, data: result});
     } catch (e) {
       console.log(e.code);

@@ -1,8 +1,8 @@
 import {Modal, Button} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
-import './Popup.scss';
 import {useEffect} from 'react';
 import {getInstantFilm} from '../../store/films/actions';
+import './Popup.scss';
 
 const Popup = ({open, handleClose, data}) => {
   const dispatch = useDispatch();
@@ -29,13 +29,26 @@ const Popup = ({open, handleClose, data}) => {
             background: `url(https://image.tmdb.org/t/p/w400/${current_film?.backdrop_path})`,
           }}
         ></div>
-        <h3>Language: {current_film?.original_language}</h3>
         <h3>
-          Overview <span>{current_film?.overview}</span>{' '}
+          {current_lang === 'ru-RU' ? 'Язык ' : 'Language'}:
+          <b> {current_film?.original_language}</b>
         </h3>
-        <h3>tagline: {current_film?.tagline} </h3>
+        <br />
+        <h3>
+          {current_lang === 'ru-RU' ? 'Обзор' : 'Overview'}:
+          <b>
+            <span>{current_film?.overview}</span>
+          </b>
+        </h3>
+
+        <br />
+        <h3>
+          {current_lang === 'ru-RU' ? 'Слоган' : 'Tagline'}:
+          {current_film?.tagline}
+        </h3>
+        <br />
         <Button variant='contained' onClick={handleClose}>
-          Close
+          {current_lang === 'ru-RU' ? 'Закрыть' : 'Close'}
         </Button>
       </div>
     </Modal>

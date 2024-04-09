@@ -3,9 +3,10 @@ import {DataGrid} from '@mui/x-data-grid';
 import {useDispatch, useSelector} from 'react-redux';
 import {getAllFilms} from '../../store/films/actions';
 import {getParams} from '../../store/localstorage/actions';
-import {columns} from '../../constans/constans';
+import {columns, columns_ru} from '../../constans/constans';
 import {parseCustomDate} from '../../helper/parseCustomDate';
 import Popup from '../Popup/Popup';
+import {ruRU} from '@mui/x-data-grid/locales';
 
 const defaultFilter = {
   items: [],
@@ -18,15 +19,23 @@ const DataTable = () => {
   const [currentId, setCurrentId] = useState();
   const [prevFilms, setPrevFilms] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [text, setText] = useState();
+
+  const films_lang = useSelector((state) => state.films.lang);
+  const films = useSelector((state) => state.films.films);
+  useEffect(() => {
+    if (films_lang === 'ru-RU') {
+      setText(ruRU.components.MuiDataGrid.defaultProps.localeText);
+    } else {
+      setText();
+    }
+  }, [films_lang]);
   const [params, setParams] = useState({
     filter: defaultFilter,
   });
   useEffect(() => {
     Object.keys(params) && dispatch(getParams(params));
   }, [params]);
-
-  const films_lang = useSelector((state) => state.films.lang);
-  const films = useSelector((state) => state.films.films);
 
   const dispatch = useDispatch();
 
@@ -87,11 +96,12 @@ const DataTable = () => {
         onFilterModelChange={handleFilterModelChange}
         onSortModelChange={handleSortModelChange}
         rows={prevFilms}
+        localeText={text}
         filterModel={params.filter}
         sortModel={params.sort}
         columnVisibilityModel={params.hideColumn}
         onColumnVisibilityModelChange={columnVisible}
-        columns={columns}
+        columns={films_lang === 'ru-RU' ? columns_ru : columns}
         pageSize={5}
         rowsPerPageOptions={[5, 10, 20]}
         onRowClick={handleRowClick}

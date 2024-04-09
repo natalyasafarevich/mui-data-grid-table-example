@@ -1,7 +1,7 @@
-import { LOCALSTORAGE } from "./actions";
+import {LOCALSTORAGE} from './actions';
 
 const initialState = {
-params:[]
+  params: [],
 };
 
 export const LocalStorageReducer = (state = initialState, action) => {
@@ -9,9 +9,9 @@ export const LocalStorageReducer = (state = initialState, action) => {
     case LOCALSTORAGE:
       return {
         ...state,
-        params: action.data
-      }
-     
+        params: action.data,
+      };
+
     default:
       return state;
   }
