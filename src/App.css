@@ -1,0 +1,11 @@
+.App__container {
+  display: flex;
+  padding: 20px;
+  justify-content: center;
+}
+.App__container div {
+  margin: 0 5px;
+}
+.flex {
+  display: flex;
+}
